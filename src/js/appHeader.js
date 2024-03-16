@@ -46,7 +46,7 @@ export const createHeader = (city) => {
     headerCity.append(searchBlock);
   });
 
-  const showError = (message) => {
+  const showError = () => {
     errorBlock.classList.add("show-error");
     errorBlock.textContent = message;
   };

@@ -17,9 +17,31 @@ export const handleVVeatherByGeolocation = () => {
 
     const result = await response.json();
 
-    const vveather = await getData(result.features[0].properties.city);
+    const city = result.features[0].properties.city;
+    const addressLine2 = result.features[0].properties.address_line2;
 
-    resetVVeatherContent(result.features[0].properties.city, vveather);
+    const mockAPIResponse = await fetch(
+      "https://65f341c1105614e654a03f14.mockapi.io/api/v1/vveather",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: Number,
+          addressLine2: addressLine2,
+        }),
+      }
+    );
+
+    const mockData = await mockAPIResponse.json();
+    console.log(mockData);
+
+    const vveather = await getData(city);
+
+    resetVVeatherContent(city, vveather);
+
+    console.log(result);
   };
 
   const error = (err) => {
